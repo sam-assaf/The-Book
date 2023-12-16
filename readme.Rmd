@@ -1,0 +1,10 @@
+---
+title: "The Book"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Everything you need to know to use **The Book**!
