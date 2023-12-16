@@ -59,6 +59,7 @@ library(magick)
 library(DT)
 library(reshape2)
 library(htmltools)
+library(gt)
 ```
 
 
@@ -89,13 +90,29 @@ Quarto enables you to weave together content and executable code into a finished
 
 # Abstract & Example : Analysts & Coaches {#abstract-example--analysts--coaches}
 
+
+
+```{r video example, echo = FALSE, fig.cap="Video Explaining a Use Case", dpi=300}
+htmltools::tags$video(
+  width = "700",
+  height = "500",
+  controls = NA,
+  htmltools::tags$source(
+    src='../../../MSBA-SA/The Book Project v_3/Final Submission/The Book v_3 Example Situation.mp4',
+    type = "video/mp4"
+  ),
+  "Your browser does not support the video tag."
+)
+```
+
+
 ```{r example book page, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics("~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png")
+knitr::include_graphics("../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png")
 ```
 
 
 ```{r historical play sit, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/play_type_by_situation.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/play_type_by_situation.png')
 ```
 
 # Introduction : Analysts & Coaches {#introduction--analysts--coaches}
@@ -107,7 +124,7 @@ knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission
 # Data Overview : Analysts {#data-overview--analysts}
 
 ```{r continous vs binned yard line, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_by_yardline_and_yardline_cat.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_by_yardline_and_yardline_cat.png')
 ```
 
 ## Variables in Model : Analysts & Coaches {#variables-in-model--analysts--coaches}
@@ -131,39 +148,7 @@ gt_table <- df %>%
   cols_label(
     OutcomeVariable = "Outcome Variable",
     GameData = "Game Data",
-    PlayData = "Play Data")
-
-# Print the gt table
-print(gt_table)
-```
-
-
-```{r}
-# Define the data in a tibble (from the dplyr package)
-df <- tibble::tibble(
-  Category = c("Outcome Variable", "Game Data", "Play Data"),
-  Description = c(
-    "Win Probability Added (WPA)", 
-    paste(c("Stadium", "Roof", "Surface", "Temperature", "Wind", "Weather detail"), collapse = "; "),
-    paste(c("Play type (input)", "Field goal probability", "Yards to go (first down or score)", 
-            "Yardline (continuous and binned)[^3]", "EPAs[^4]", "ELOs[^5]", "Score differential (binned)[^6]", 
-            "Game time remaining (binned)[^7]", "Score difference time ratio[^8]"), collapse = "; ")
-  )
-)
-
-# Create the gt table
-gt_table <- df %>%
-  gt() %>%
-  cols_label(Category = "") %>%  # remove the column name for Category
-  fmt_markdown(columns = vars(Description)) %>%  # this will interpret the Markdown syntax in the Description column
-  tab_options(
-    column_labels.font.size = pct(80),
-    heading.title.font.size = pct(150),
-    heading.subtitle.font.size = pct(125)
-  ) %>%
-  tab_header(
-    title = "NFL Data Categories",
-    subtitle = "This table categorizes different types of NFL data."
+    PlayData = "Play Data"
   )
 
 # Print the gt table
@@ -184,13 +169,13 @@ gt_table
 ## Data Visualization : Analysts & Coaches {#data-visualization--analysts--coaches}
 
 ```{r WPA by play type and time remaining, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_violin_by_play_type_game_time_cat.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_violin_by_play_type_game_time_cat.png')
 ```
 
 
 
 ```{r ELO and EPA, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/offense_run_elo_pre_game_pos_vs_run_epa_cumulative_lagged_1_week.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/offense_run_elo_pre_game_pos_vs_run_epa_cumulative_lagged_1_week.png')
 ```
 
 
@@ -198,12 +183,12 @@ knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission
 
 
 ```{r SHAP, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/best_final_4th_05_shap_plot.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/best_final_4th_05_shap_plot.png')
 ```
 
 
 ```{r fg cutoff, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Model v0/Plots for Write Up/fg_plot_holder.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Model v0/Plots for Write Up/fg_plot_holder.png')
 ```
 
 ## Model Adjustments : Analysts & Coaches {#model-adjustments--analysts--coaches}
@@ -211,14 +196,14 @@ knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Model v0/P
 ### Model Without Risk Aversion Adjustments : Analysts & Coaches {#model-without-risk-aversion-adjustments--analysts--coaches}
 
 ```{r Model Without Risk Aversion Adjustments, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go No Adj/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go No Adj/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
 ```
 
 
 ### Model With Risk Aversion Adjustments : Analysts & Coaches {#model-with-risk-aversion-adjustments--analysts--coaches}
 
 ```{r Model With Risk Aversion Adjustments, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
-knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
 ```
 
 
