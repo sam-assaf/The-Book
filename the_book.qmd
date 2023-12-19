@@ -62,35 +62,40 @@ library(htmltools)
 library(gt)
 ```
 
-
 ## Quarto
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
-<h1 style="text-align: center; font-size:25pt">**The Book**</h1>
-<h4 style="text-align: center; font-size:11pt">*By Sam Assaf*</h4>
+<h1 style="text-align: center; font-size:25pt">
 
+**The Book**
 
-# Outline {-}
+</h1>
 
-- [Abstract & Example : Analysts & Coaches](#abstract-example--analysts--coaches)
-- [Introduction : Analysts & Coaches](#introduction--analysts--coaches)
-- [Problem Framing : Analysts](#problem-framing--analysts)
-- [Related works : Analysts](#related-works--analysts)
-- [Data Overview : Analysts](#data-overview--analysts)
-  - [Variables in Model : Analysts & Coaches](#variables-in-model--analysts--coaches)
-  - [Data Visualization : Analysts & Coaches](#data-visualization--analysts--coaches)
-- [Methods : Analysts](#methods-:-analysts)
-  - [Model Adjustments : Analysts & Coaches](#model-adjustments--analysts--coaches)
-    - [Model Without Risk Aversion Adjustments : Analysts & Coaches](#model-without-risk-aversion-adjustments--analysts--coaches)
-    - [Model With Risk Aversion Adjustments : Analysts & Coaches](#model-with-risk-aversion-adjustments--analysts--coaches)
-- [Discussion : Analysts & Coaches](#discussion--analysts--coaches)
-- [Examples Plots / Situation : Analysts & Coaches](#examples-plots--situation--analysts--coaches)
-- [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work--analysts--coaches)
+<h4 style="text-align: center; font-size:11pt">
+
+*By Sam Assaf*
+
+</h4>
+
+# Outline {.unnumbered}
+
+-   [Abstract & Example : Analysts & Coaches](#abstract-example--analysts--coaches)
+-   [Introduction : Analysts & Coaches](#introduction--analysts--coaches)
+-   [Problem Framing : Analysts](#problem-framing--analysts)
+-   [Related works : Analysts](#related-works--analysts)
+-   [Data Overview : Analysts](#data-overview--analysts)
+    -   [Variables in Model : Analysts & Coaches](#variables-in-model--analysts--coaches)
+    -   [Data Visualization : Analysts & Coaches](#data-visualization--analysts--coaches)
+-   [Methods : Analysts](#methods-:-analysts)
+    -   [Model Adjustments : Analysts & Coaches](#model-adjustments--analysts--coaches)
+        -   [Model Without Risk Aversion Adjustments : Analysts & Coaches](#model-without-risk-aversion-adjustments--analysts--coaches)
+        -   [Model With Risk Aversion Adjustments : Analysts & Coaches](#model-with-risk-aversion-adjustments--analysts--coaches)
+-   [Discussion : Analysts & Coaches](#discussion--analysts--coaches)
+-   [Examples Plots / Situation : Analysts & Coaches](#examples-plots--situation--analysts--coaches)
+-   [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work--analysts--coaches)
 
 # Abstract & Example : Analysts & Coaches {#abstract-example--analysts--coaches}
-
-
 
 ```{r video example, echo = FALSE, fig.cap="Video Explaining a Use Case", dpi=300}
 htmltools::tags$video(
@@ -106,16 +111,44 @@ htmltools::tags$video(
 ```
 
 
-```{r example book page, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+In week 14 of this year’s NFL season (2023), the Pittsburgh Steelers hosted the New England Patriots on Thursday Night Football. That evening, numerous 4th-down calls were questionable from an analytics’ perspective. This report is an in depth explanation of the process utilized to create “The Book,, an analytics-based advisory tool for football coaches to utilize when uncertain what play to run on 4th down given the game situation. In order to demonstrate how this information would be used in practice, a specific play in the Steelers v. Patriots game will be highlighted, and the model (henceforth “Split Zone Model”) will suggest the play type that yields the highest increase in the probability of winning. The offensive coach can then take this into account as they are calling the play.
+
+The Example: With 5:06 left in the 4th quarter, leading by 3 points, head coach Tomlin of the Steelers was faced with a decision on 4th and 3 with the ball on their 38 yard line (62 yards from the scoring endzone).. After some deliberation, Coach Tomlin decided to line up in punt formation, likely with the intention to punt, but the long snapper was called for a false start penalty, resulting in a 5 yard loss and putting them on the 33 yard line, with a 4th and 8 decision. Prior to the penalty, “The Book” strongly advised to “go” in this situation. This was an ideal scenario for a coach to consult “The Book” to get analytical advice quickly and efficiently. As the Split Zone Model’s predictions stop at 60 yards from an offensive team’s scoring endzone (a team’s own 40 yard line), it is possible to extrapolate and predict beyond the boundaries that are explicitly stated, and infer with the knowledge of lost precision as one strays away from the confines of the model. However, after the additional 5 yard penalty, it might be too far from the bounds of the model to offer helpful insight. Figure 1 provides a visual representation, which through the use of colorized boxes, gives a coach instant visual cues that guide decision making. The figure uses a common analytical metric called “Win Probability Added - WPA,” which is defined as the percent change in a team's chances of winning from one play to the next. In the figure below, the color represents the difference between the WPA of running/passing (i.e., going for it) versus the WPA of punting/field goal (i.e., not going for it).
+
+
+
+```{r example book page, echo = FALSE, fig.cap="Figure 1: This figure shows the difference in the two predicted win probability added (WPA) values associated with passing or running the ball (i.e, “go for it”) or kicking a field goal or punting (i.e., “not going for it”). The brighter the green, the more strongly the Split Zone Model recommends going for it; the darker the brown, the more strongly the Split Zone Model recommends not going for it; however as the color approaches white, the guidance offered  is less decisive.", dpi=300}
 knitr::include_graphics("../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png")
 ```
 
 
-```{r historical play sit, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+
+Given the evidence presented in Figure 1, which incorporates variables (described below) that are specific to this game such as both teams’ strengths and weaknesses and the game situation described above, the model relatively strongly predicts to go for it for both the 4th and 3. Not only does a pass or run have a higher WPA value, but when incorporating a base risk aversion adjustment and a punt risk aversion adjustment (both are described below), there is a statistically significant difference between going for it and not going for it, lending strength/confidence to the decision .
+When looking at the distribution of historical play types similar to the  situation described (see Figure 2), it is evident how risk averse coaches are, and how guidance from the Split Zone Model could help coaches make the decision that offers them the highest increase in probability of winning.
+
+
+
+```{r historical play sit, echo = FALSE, fig.cap="Figure 2: Historical counts of play type chosen when faced with a 4th and 3, 46-60 yard line", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/play_type_by_situation.png')
 ```
 
+In this report, there are sections that are identified as beneficial for both analysts and coaches, and other sections that would likely only be useful for analysts. Nonetheless, anyone with a base level of statistics and minimal guidance can follow along and likely understand the findings of this report. 
+
 # Introduction : Analysts & Coaches {#introduction--analysts--coaches}
+
+The goal of this project is to provide NFL coaches a binder of game situation sheets, The Book, they can quickly consult during a game. The Book, which is created using a proprietary algorithm called the Split Zone Model, provides simple visualizations that are easy to read and process in real-world, high pressure situations. The Book is unique to each team and opponent, and will be utilized when a coach is faced with an uncertain situation, meaning that it is unclear what the next play call or play type should be. One can watch virtually any football game and hear announcers make comments like, “the analytics say you should go for it here.” This is even more intriguing considering there is no obvious way to know what is behind commentary on predictions.
+
+Relatedly, in collegiate football, many teams, including the University of Notre Dame, utilize the “Game Book,'' an analytics-based binder developed by Championship Analytics, that they use for each game. The “Game Book” provides a recommendation on whether to go for it, kick a field goal, or punt based on the time remaining, score differential, field position, and yards to get a first down. It is unclear all the ways in which The Game Book, from Championship Analytics, differs from The Book; but the way in which the visuals are displayed and the description of the game situation are certain. It is impossible to know the specific variables that similar products use to create their analytical books.
+
+It can be argued that there has been a change in how football games are played that correlates with this rising awareness of analytics. The plot shown in Figure 3, from Ben Balwin, a well-known football analytics’ expert, illustrates the increase in frequency with which head coaches “go for it” when the “analytics” says they should, during the 2014-2020 timeframe. Although we are careful to conflate correlation with causation, it is reasonable to believe that awareness of analytics (re: math) accounts for the difference in coaching decisions.
+
+```{r Ben Baldwin, echo = FALSE, fig.cap="Figure 3. Difference between “go for it” decisions from 2014 to 2020. (Ben Balwin)", dpi=300}
+knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/Ben Baldwin 4th Down.png')
+```
+
+
+As a Division 1 collegiate student-athlete in football, I have had the opportunity to see first hand how advances in analytics have changed the game of football, and this has served as the main motivation for this project.  My perspective as a football player and sports analytics aficionado provides me with unique insights into the implementation of analytics, but it also forces me to recognize the human element in the game.  Football is a game that is played by players, and no matter what the analytics might advise a coach to do, it is the player who implements the play and ultimately makes it succeed or fail. That being said, the use of in-game analytics is undoubtedly a growing trend, and coaches are starting to seriously weigh the analytical advice when approaching a tough decision, specifically whether to go for the first down or not.
+
 
 # Problem Framing : Analysts {#problem-framing--analysts}
 
@@ -128,8 +161,6 @@ knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/
 ```
 
 ## Variables in Model : Analysts & Coaches {#variables-in-model--analysts--coaches}
-
-
 
 ```{r variable table}
 # Create vectors for each category of information
@@ -155,37 +186,21 @@ gt_table <- df %>%
 gt_table
 ```
 
-
-[^3]: Quantitative : 1 - 60 & Categorical / Bins : [1, 5], [6, 15], [16, 25], [26, 38], [39 to 45], [46, 60]
-[^4]: Expected Points Added (EPAs) are a measure of the expected point value at the start of a play. Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game.
-[^5]: ELO ratings are used to rank teams and specific features of a team based on their performance. Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game
-[^6]: Categorical / Bins : (-∞,17], [-16,-9], [-8,-4], [-3,0], [1,3], [4, 8], [9, 16], [17,∞)
-[^7]: Categorical / Bins : First Quarter : [15,0], Second Quarter : [15,4), [4, 2), [2,0], Third Quarter: [15,0], Fourth Quarter : [15, 7), [7, 4), [4, 2), [2, 0]
-[^8]: Score difference time ratio is addressing the relationship between score differential and time remaining. The average time remaining for each bin of time remaining and most frequently occurring score differential for each bin to calculate this measure
-
-
-
-
 ## Data Visualization : Analysts & Coaches {#data-visualization--analysts--coaches}
 
 ```{r WPA by play type and time remaining, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_violin_by_play_type_game_time_cat.png')
 ```
 
-
-
 ```{r ELO and EPA, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/offense_run_elo_pre_game_pos_vs_run_epa_cumulative_lagged_1_week.png')
 ```
 
-
 # Methods : Analysts {#methods-:-analysts}
-
 
 ```{r SHAP, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/best_final_4th_05_shap_plot.png')
 ```
-
 
 ```{r fg cutoff, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Model v0/Plots for Write Up/fg_plot_holder.png')
@@ -199,13 +214,11 @@ knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Model v0/Pl
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go No Adj/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
 ```
 
-
 ### Model With Risk Aversion Adjustments : Analysts & Coaches {#model-with-risk-aversion-adjustments--analysts--coaches}
 
 ```{r Model With Risk Aversion Adjustments, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
 ```
-
 
 # Discussion : Analysts & Coaches {#discussion--analysts--coaches}
 
