@@ -108,6 +108,9 @@ htmltools::tags$video(
  ),
  "Your browser does not support the video tag."
 )
+
+# insert your path
+
 ```
 
 
@@ -118,6 +121,9 @@ The Example: With 5:06 left in the 4th quarter, leading by 3 points, head coach 
 
 ```{r example book page, echo = FALSE, fig.cap="Figure 1: This figure shows the difference in the two predicted win probability added (WPA) values associated with passing or running the ball (i.e, “go for it”) or kicking a field goal or punting (i.e., “not going for it”). The brighter the green, the more strongly the Split Zone Model recommends going for it; the darker the blue, the more strongly the Split Zone Model recommends not going for it; however as the color approaches white, the guidance offered is less decisive.", dpi=300}
 knitr::include_graphics("../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png")
+
+# insert your path
+
 ```
 
 
@@ -128,6 +134,9 @@ When looking at the distribution of historical play types similar to the situati
 
 ```{r historical play sit, echo = FALSE, fig.cap="Figure 2: Historical counts of play type chosen when faced with a 4th and 3, 46-60 yard line", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/play_type_by_situation.png')
+
+# insert your path
+
 ```
 
 In this report, there are sections that are identified as beneficial for both analysts and coaches, and other sections that would likely only be useful for analysts. Nonetheless, anyone with a base level of statistics and minimal guidance can follow along and likely understand the findings of this report.
@@ -145,6 +154,9 @@ It can be argued that there has been a change in how football games are played t
 ```{r Ben Baldwin, echo = FALSE, fig.cap="Figure 3. Difference between “go for it” decisions from 2014 to 2020. (Ben Balwin)", dpi=300, out.width=600}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/Ben Baldwin 4th Down.png')
 # need to add footnote to ben baldwin
+
+# insert your path
+
 ```
 
 
@@ -182,6 +194,9 @@ One contribution of the Split Zone Model is that it clusters (bins) continuous d
 
 ```{r continous vs binned yard line, echo = FALSE, fig.cap="Figure 4. In order to allow the model to better utilize general football knowledge that might otherwise be overlooked or unseen, yardline bins were created. This visualization is presented to show that these yardline bins do in fact capture the general movement of the average WPA (for 4th downs only & inside 60 yards) when grouped by individual yardline.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_by_yardline_and_yardline_cat.png')
+
+# insert your path
+
 ```
 
 
@@ -222,10 +237,16 @@ gt_table
 
 ```{r WPA by play type and time remaining, echo = FALSE, fig.cap="Figure 5. This shows the distribution WPA by play type, all faceted by the score differential bins. An extremely interesting one to look at is when a possession team is down by 2 points, 1 point, or tied, the long tails on the distribution of field goal show how much making or missing that field goal can swing and change the win probability for the game (which is a play’s win probability added). Also note that the tails get longer as time left in the game decreases, again this is to be expected as plays can have more impact the less time there is left in a game. This is a major reason for the inclusion of not only time but the time difference ratio. Overall, this plot does a good job of showing how different plays can affect win probability depending on the score differential at the respective time of the game.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_violin_by_play_type_game_time_cat.png')
+
+# insert your path
+
 ```
 
 ```{r ELO and EPA, echo = FALSE, fig.cap="Figure 6. This plot supports the expected relationship between a team’s pregame ELO rating and their lagged pregame run EPA. As expected there is a clear positive relationship between the two. This visualization is intended to show that ELO is a fair metric to assess a team's strengths and weaknesses, assuming that EPA is a valid statistic for assessing a team as well.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/offense_run_elo_pre_game_pos_vs_run_epa_cumulative_lagged_1_week.png')
+
+# insert your path
+
 ```
 
 These visualizations do not cover the extent of information the data covers, but they give valuable insight into the type of data contained in the data set and what insights and outcomes might be gathered from analyzing this data and building a model.
@@ -236,6 +257,9 @@ The final data set consists of columns that are either numeric or boolean and it
 
 ```{r SHAP, echo = FALSE, fig.cap="Figure 7. The 15 most impactful variables to the final model, colored by the feature value. For example quantitative measures such as ELO, where a low (yellow) is 1000-1300, middle (pink) is 1300 - 1600 and high (purple) is 1600 - 1900. Qualitative measures, like our binned game time, are either true (1) or false (0) for that respective bin. Each point represents an observation and the movement along the x-axis (SHAP value) represents how much it impacted the prediction. A significant number of these top 15 variables were to be expected. It was very encouraging that many of the bins which were created were among these 15. This is a result of creating the bins by looking at the distributions of those continuous variables and utilizing football knowledge to help nudge the machine learning model in the correct direction.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Visualizations/best_final_4th_05_shap_plot.png')
+
+# insert your path
+
 ```
 
 
@@ -248,6 +272,9 @@ In order to compare different models when standard measures of model performance
 
 ```{r fg cutoff, echo = FALSE, fig.cap="Figure 8. The cutoff of 38 yards is quite clearly seen as one can observe both the steep decline in number of field goals attempted and the decrease in the field goal probability based on historical data.", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Model v0/Plots for Write Up/fg_plot_holder.png')
+
+# insert your path
+
 ```
 
 
@@ -265,6 +292,9 @@ Examples of predictions with and without the risk adjustment are presented below
 
 ```{r Model Without Risk Aversion Adjustments, echo = FALSE, fig.cap="", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go No Adj/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
+
+# insert your path
+
 ```
 
 Above are the model's predictions without any risk adjustments (field goal and punt base risk aversion adjustments, punt specific risk aversion adjustments, and coach specific risk aversion adjustment). The model clearly favors passing or running (going for it) to field goal or punting (not going for it) in almost every scenario; actually the model does tell the coach to “go for it” in every scenario when the team needs10 yards or fewer to get the first down or or a score. While this is what the raw and unadjusted analytics advise, in actuality, if a coach was presented with this, he would almost certainly disregard any other advice generated by this model. This is likely due to the fact that coaching is inherently a risk averse profession. It is for this reason that it was necessary to add adjustable risk aversion factors.
@@ -273,6 +303,9 @@ Above are the model's predictions without any risk adjustments (field goal and p
 
 ```{r Model With Risk Aversion Adjustments, echo = FALSE, fig.cap="", dpi=300}
 knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
+
+# insert your path
+
 ```
 
 After implementing the risk adjustment factors, those who know football might see a more “reasonable” prediction that might still err on the side of being too risky, but would not call into question the validity of the model by a coach. Note that this model predicts that the team should “go for it” virtually any time there are 3 yards to go or fewer.
