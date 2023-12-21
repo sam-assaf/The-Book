@@ -135,6 +135,7 @@ When looking at the distribution of historical play types similar to the situati
 ```{r historical play sit, echo = FALSE, dpi=300}
 #| fig-cap: "Historical counts of play type chosen when faced with a 4th and 3, 46-60 yard line"
 #| label: fig-historical-play-situation
+#| cap-location: margin
 knitr::include_graphics('Visualizations/play_type_by_situation.png')
 
 # insert your path
@@ -153,11 +154,12 @@ Relatedly, in collegiate football, many teams, including the University of Notre
 It can be argued that there has been a change in how football games are played that correlates with this rising awareness of analytics. The plot shown in Figure 3, from Ben Balwin, a well-known football analytics’ expert, illustrates the increase in frequency with which head coaches “go for it” when the “analytics” says they should, during the 2014-2020 timeframe. Although we are careful to conflate correlation with causation, it is reasonable to believe that awareness of analytics (re: math) accounts for the difference in coaching decisions.
 
 
-```{r Ben Baldwin, echo = FALSE, fig.cap="Figure 3. Difference between “go for it” decisions from 2014 to 2020. (Ben Balwin)", dpi=300, out.width=600}
-knitr::include_graphics('Visualizations/Ben Baldwin 4th Down.png')
-# need to add footnote to ben baldwin
+```{r Ben Baldwin, echo = FALSE, dpi=300, out.width=600}
+#| fig-cap: "Difference between “go for it” decisions from 2014 to 2020. (Ben Balwin)"
+#| cap-location: margin
+#| label: fig-ben-baldwin
 
-# insert your path
+knitr::include_graphics('Visualizations/Ben Baldwin 4th Down.png')
 
 ```
 
