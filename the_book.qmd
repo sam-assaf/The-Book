@@ -62,9 +62,6 @@ library(htmltools)
 library(gt)
 ```
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
 <h1 style="text-align: center; font-size:25pt">
 
@@ -92,7 +89,6 @@ Quarto enables you to weave together content and executable code into a finished
     -  [Model Without Risk Aversion Adjustments : Analysts & Coaches](#model-without-risk-aversion-adjustments--analysts--coaches)
     -  [Model With Risk Aversion Adjustments : Analysts & Coaches](#model-with-risk-aversion-adjustments--analysts--coaches)
 -  [Discussion : Analysts & Coaches](#discussion--analysts--coaches)
--  [Examples Plots / Situation : Analysts & Coaches](#examples-plots--situation--analysts--coaches)
 -  [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work--analysts--coaches)
 
 # Abstract & Example : Analysts & Coaches {#abstract-example--analysts--coaches}
@@ -320,7 +316,6 @@ Although this might seem counterintuitive to remove the differences in predictio
 The results presented in this project are intriguing. Using this research one can choose any upcoming game in the NFL, pull its data from nflfastR, gather all the information needed and calculate the statistics for the model. Once that is complete, one can plug the respective information into the appropriate places in the R script and it will generate 72 plots for each situation considering the variables categorical time left and categorical score difference in the game. Additionally, a coach or staffer could choose what type of plot they would like to see in the “heat of the moment,” while also specifying their expected yard line for the field goal cut off. In addition, the number of bins (and how many observations each bin contains) could be altered depending on the coach's thoughts. The coach could alter how wide these bins (yardline, time, and score differential) should stretch based on their coaching preferences and style. In addition, the coach would choose what coach risk aversion adjustment parameter was appropriate and this could change weekly.
 
 
-# Examples Plots / Situation : Analysts & Coaches {#examples-plots--situation--analysts--coaches}
 
 # Conclusion and Future Work : Analysts & Coaches {#conclusion-and-future-work--analysts--coaches}
 
