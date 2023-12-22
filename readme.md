@@ -2,17 +2,23 @@ Split Zone Analytics - The Book
 ================
 
 <h1 style="text-align: center; font-size:20pt">
+<!-- Everything you need to know to use **The Book**! -->
 
-Everything you need to know to use **The Book**!
+<div align="center" style="margin-top: 20px;">
+
+<a href="https://bit.ly/split-zone-analytics" target="_blank" style="font-size: 18px; color: #0366d6; text-decoration: none;">Read
+the Paper</a>
+
+</div>
 
 </h1>
 <h2 style="font-size:16pt">
 
-**Example of The Book**
+**Example Use Case of The Book**
 
 </h2>
 
-*Example Video*
+*Video*
 
 <div align="center">
 
@@ -20,9 +26,20 @@ Everything you need to know to use **The Book**!
 
 </div>
 
-*Example Sheet From The Book*
+*Sheet From The Book*
 
 <img src="Visualizations/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png" width="4500" />
+
+- How to use a *The Book*
+  1)  Locate the sheet according to the game situation (ex : 4th
+      Quarter, 7 - 4 minutes left, Losing by 3 to tied)
+  2)  Find the bin on the x-axis (Yardline Bins) that contains the
+      current line of scrimmage
+  3)  Find the yards to go on the y-axis (Yards to Go) that corresponds
+      the current yards to go
+  4)  Identify the color of the bin and advise the coach to go for it
+      (brighter green), or not go for it (darker blue), or go with their
+      gut (white)
 
 <h2 style="font-size:16pt">
 
