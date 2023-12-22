@@ -133,15 +133,7 @@ library(gt)
 
 
 
-
-
-```{=html}
-<!-- YouTube Video Embed -->
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EysyNzu0tno" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-
-```
-
+{{< video https://www.youtube.com/embed/v=EysyNzu0tno >}}
 
 
 In week 14 of this year’s NFL season (2023), the Pittsburgh Steelers hosted the New England Patriots on Thursday Night Football. That evening, numerous 4th-down calls were questionable from an analytics’ perspective. This report is an in depth explanation of the process utilized to create “The Book, an analytics-based advisory tool for football coaches to utilize when uncertain what play to run on 4th down given the game situation. In order to demonstrate how this information would be used in practice, a specific play in the Steelers v. Patriots game will be highlighted, and the model (henceforth “Split Zone Model”) will suggest the play type that yields the highest increase in the probability of winning. The offensive coach can then take this into account as they are calling the play.
