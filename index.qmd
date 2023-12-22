@@ -101,19 +101,19 @@ library(gt)
 # Abstract & Example : Analysts & Coaches {#abstract-example--analysts--coaches}
 
 ```{r video example, echo = FALSE, dpi=300,  results='asis'}
-#| fig-cap: "Video Explaining a Use Case"
-#| label: fig-example-video
-#| cap-location: margin
-htmltools::tags$video(
- width = "700",
- height = "500",
- controls = NA,
- htmltools::tags$source(
-  src='../../../MSBA-SA/The Book Project v_3/Final Submission/The Book v_3 Example Situation.mp4',
-  type = "video/mp4"
- ),
- "Your browser does not support the video tag."
-)
+# #| fig-cap: "Video Explaining a Use Case"
+# #| label: fig-example-video
+# #| cap-location: margin
+# htmltools::tags$video(
+#  width = "700",
+#  height = "500",
+#  controls = NA,
+#  htmltools::tags$source(
+#   src='../../../MSBA-SA/The Book Project v_3/Final Submission/The Book v_3 Example Situation.mp4',
+#   type = "video/mp4"
+#  ),
+#  "Your browser does not support the video tag."
+# )
 
 
 
@@ -131,6 +131,16 @@ htmltools::tags$video(
 
 ```
 
+
+
+
+
+```{=html}
+<!-- YouTube Video Embed -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EysyNzu0tno" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+```
 
 
 
