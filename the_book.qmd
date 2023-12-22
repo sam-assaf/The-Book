@@ -88,6 +88,7 @@ library(gt)
     -  [Model With Risk Aversion Adjustments : Analysts & Coaches](#model-with-risk-aversion-adjustments--analysts--coaches)
 -  [Discussion : Analysts & Coaches](#discussion--analysts--coaches)
 -  [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work--analysts--coaches)
+-  [ Biblography and Reference](#biblography-and-reference)
 
 # Abstract & Example : Analysts & Coaches {#abstract-example--analysts--coaches}
 
@@ -149,7 +150,7 @@ The goal of this project is to provide NFL coaches a binder of game situation sh
 
 Relatedly, in collegiate football, many teams, including the University of Notre Dame, utilize the “Game Book,'' an analytics-based binder developed by Championship Analytics, that they use for each game. The “Game Book” provides a recommendation on whether to go for it, kick a field goal, or punt based on the time remaining, score differential, field position, and yards to get a first down. It is unclear all the ways in which The Game Book, from Championship Analytics, differs from The Book; but the way in which the visuals are displayed and the description of the game situation are certain. It is impossible to know the specific variables that similar products use to create their analytical books.
 
-It can be argued that there has been a change in how football games are played that correlates with this rising awareness of analytics. The plot shown in Figure 3, from Ben Balwin, a well-known football analytics’ expert, illustrates the increase in frequency with which head coaches “go for it” when the “analytics” says they should, during the 2014-2020 timeframe. Although we are careful to conflate correlation with causation, it is reasonable to believe that awareness of analytics (re: math) accounts for the difference in coaching decisions.
+It can be argued that there has been a change in how football games are played that correlates with this rising awareness of analytics. The plot shown in (see @fig-ben-baldwin), from Ben Balwin, a well-known football analytics’ expert, illustrates the increase in frequency with which head coaches “go for it” when the “analytics” says they should, during the 2014-2020 timeframe. Although we are careful to conflate correlation with causation, it is reasonable to believe that awareness of analytics (re: math) accounts for the difference in coaching decisions.
 
 
 ```{r Ben Baldwin, echo = FALSE, dpi=300, out.width=600}
@@ -191,10 +192,13 @@ The Elo and EPA (Expected Points Added) statistics are used in the model to capt
 
 As noted, weather is used as a variable in the Split Zone Model, but one complication is that some observations were missing. In order to preserve observations, certain games had their weather statistics imputed with the mean of the respective weather measurement for the respective stadium. In addition, no specific weather details were artificially imposed on the game. If any domes or closed stadiums were missing this information, it was considered to be 70 degrees with 0 mph wind.
 
-One contribution of the Split Zone Model is that it clusters (bins) continuous data into categorical variables (ranges); this was done for three reasons. First, it is imperative to provide coaches with a reasonable number of sheets in “The Book” for them to consult during a game. Modifying how much the in-game variables could change by bining them was necessary in order to limit the number of permutations / combinations of advising sheets. Second, the information presented in the sheets is simplified (i.e., there are far fewer data points to consider), making it less cognitively demanding resulting in easier and quicker decisions for coaches. Finally, putting the data in bins allows the machine learning model to be able to split the data based on typical football knowledge that was used to create these bins. For example, competing models typically use continuous variables, for example, the time left in a game. This is measured in seconds, and if left as a continuous variable, the model would account for every second-by-second value left in a game, meaning there would be 3,600 different potential values to split the data on. Utilizing basic football knowledge and looking at WPA distribution by seconds left in the game, bins were manually chosen for this continuous measure (bins are listed below, see Figure 4). This was done for the score differential (relative to the possession team) as well (bins are listed below). The thought process for choosing these was as follows: a field goal difference or less, a touchdown (with two point conversion) or less, a two possession game, and more than a two possession game. The last binned variable that was created was yardline. This was based on an underlying understanding of what analytics initially predicted and a break at the 38 yard line, which was identified as the end of field goal range. Note that these yard line bins can easily be altered to fit a coaches specific play calling tendency by yards away from scoring end zone and what they identify as the kicker’s range.
+One contribution of the Split Zone Model is that it clusters (bins) continuous data into categorical variables (ranges); this was done for three reasons. First, it is imperative to provide coaches with a reasonable number of sheets in “The Book” for them to consult during a game. Modifying how much the in-game variables could change by bining them was necessary in order to limit the number of permutations / combinations of advising sheets. Second, the information presented in the sheets is simplified (i.e., there are far fewer data points to consider), making it less cognitively demanding resulting in easier and quicker decisions for coaches. Finally, putting the data in bins allows the machine learning model to be able to split the data based on typical football knowledge that was used to create these bins. For example, competing models typically use continuous variables, for example, the time left in a game. This is measured in seconds, and if left as a continuous variable, the model would account for every second-by-second value left in a game, meaning there would be 3,600 different potential values to split the data on. Utilizing basic football knowledge and looking at WPA distribution by seconds left in the game, bins were manually chosen for this continuous measure (bins are listed below, see ). This was done for the score differential (relative to the possession team) as well (bins are listed below). The thought process for choosing these was as follows: a field goal difference or less, a touchdown (with two point conversion) or less, a two possession game, and more than a two possession game. The last binned variable that was created was yardline. This was based on an underlying understanding of what analytics initially predicted and a break at the 38 yard line, which was identified as the end of field goal range. Note that these yard line bins can easily be altered to fit a coaches specific play calling tendency by yards away from scoring end zone and what they identify as the kicker’s range.
 
 
-```{r continous vs binned yard line, echo = FALSE, fig.cap="Figure 4. In order to allow the model to better utilize general football knowledge that might otherwise be overlooked or unseen, yardline bins were created. This visualization is presented to show that these yardline bins do in fact capture the general movement of the average WPA (for 4th downs only & inside 60 yards) when grouped by individual yardline.", dpi=300}
+```{r continous vs binned yard line, echo = FALSE, dpi=300}
+#| fig-cap: "In order to allow the model to better utilize general football knowledge that might otherwise be overlooked or unseen, yardline bins were created. This visualization is presented to show that these yardline bins do in fact capture the general movement of the average WPA (for 4th downs only & inside 60 yards) when grouped by individual yardline."
+#| cap-location: margin
+#| label: cont-binned-yardline
 knitr::include_graphics('Visualizations/wpa_by_yardline_and_yardline_cat.png')
 
 # insert your path
@@ -232,14 +236,34 @@ gt_table <- df %>%
   PlayData = "Play Data"
  ) %>% 
   tab_footnote(
-    footnote = "Footnote text here",
+    footnote = "Continuous vs. bins: 1 - 60 & Bins : [1, 5], [6, 15], [16, 25], [26, 38], [39 to 45], [46, 60]",
     locations = cells_body(columns = c(PlayData), 
-                           rows = PlayData == "Score difference time ratio")
+                           rows = PlayData == "Yardline (continuous and binned)")
   ) %>% 
   tab_footnote(
-    footnote = "More text here",
+    footnote = "Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game",
     locations = cells_body(columns = c(PlayData), 
                            rows = PlayData == "EPAs")
+  ) %>%
+  tab_footnote(
+    footnote = "Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game",
+    locations = cells_body(columns = c(PlayData), 
+                           rows = PlayData == "ELOs")
+  ) %>% 
+  tab_footnote(
+    footnote = "Bins : (-∞,17], [-16,-9], [-8,-4], [-3,0], [1,3], [4, 8], [9, 16], [17,∞)",
+    locations = cells_body(columns = c(PlayData), 
+                           rows = PlayData == "Score differential (binned)")
+  ) %>% 
+  tab_footnote(
+    footnote = "First Quarter : [15,0], Second Quarter : [15,4), [4, 2), [2,0], Third Quarter: [15,0], Fourth Quarter : [15, 7), [7, 4), [4, 2), [2, 0]",
+    locations = cells_body(columns = c(PlayData), 
+                           rows = PlayData == "Game time remaining (binned)")
+  ) %>% 
+  tab_footnote(
+    footnote = "Used the average time remaining for each bin of time remaining and most frequently occurring score differential for each bin to calculate this measure.",
+    locations = cells_body(columns = c(PlayData), 
+                           rows = PlayData == "Score difference time ratio")
   )
 
 # Print the gt table
@@ -248,8 +272,12 @@ gt_table
 
 ## Data Visualization : Analysts & Coaches {#data-visualization--analysts--coaches}
 
+
 ```{r WPA by play type and time remaining, echo = FALSE, dpi=300}
-#| fig.cap="Figure 5. This plot shows the distribution of WPA by play type and time remaining. The plot shows that the WPA for a field goal attempt is relatively constant, while the WPA for a punt decreases as time goes on. This is likely due to the fact that the closer to the end of the game, the more likely a team is to be losing and therefore the more likely they are to go for it on 4th down."
+#| fig-cap: "This plot shows the distribution of WPA by play type and time remaining. The plot shows that the WPA for a field goal attempt is relatively constant, while the WPA for a punt decreases as time goes on. This is likely due to the fact that the closer to the end of the game, the more likely a team is to be losing and therefore the more likely they are to go for it on 4th down."
+#| cap-location: margin
+#| label: fig-wpa-by-play-type-and-time-remaining
+
 
 knitr::include_graphics('Visualizations/wpa_violin_by_play_type_game_time_cat.png')
 
@@ -257,7 +285,14 @@ knitr::include_graphics('Visualizations/wpa_violin_by_play_type_game_time_cat.pn
 
 ```
 
-```{r ELO and EPA, echo = FALSE, fig.cap="Figure 6. This plot supports the expected relationship between a team’s pregame ELO rating and their lagged pregame run EPA. As expected there is a clear positive relationship between the two. This visualization is intended to show that ELO is a fair metric to assess a team's strengths and weaknesses, assuming that EPA is a valid statistic for assessing a team as well.", dpi=300}
+
+
+```{r ELO and EPA, echo = FALSE, dpi=300}
+#| fig-cap: "This plot supports the expected relationship between a team’s pregame ELO rating and their lagged pregame run EPA. As expected there is a clear positive relationship between the two. This visualization is intended to show that ELO is a fair metric to assess a team's strengths and weaknesses, assuming that EPA is a valid statistic for assessing a team as well."
+#| label: fig-elo-epa
+#| cap-location: margin
+
+
 knitr::include_graphics('Visualizations/offense_run_elo_pre_game_pos_vs_run_epa_cumulative_lagged_1_week.png')
 
 # insert your path
@@ -270,7 +305,13 @@ These visualizations do not cover the extent of information the data covers, but
 
 The final data set consists of columns that are either numeric or boolean and it contains over 29,000 rows and 93 predictor columns. Data is split into training and test data sets, which contain 80% and 20% of the rows, respectively. The method used to create the final prediction heat map (see Figure 7) utilizes a matrix of predicted win probabilities added by play type options and game situation and was done using regression modeling. Specifically, this was done with XGBoost, a type of gradient boosting algorithm. In simple terms it works by creating regression trees and splitting at values of variables in order to minimize the error in predictions. At the end of the modeling this allowed us to look at various plots to see which features were most impactful in the modeling.
 
-```{r SHAP, echo = FALSE, fig.cap="Figure 7. The 15 most impactful variables to the final model, colored by the feature value. For example quantitative measures such as ELO, where a low (yellow) is 1000-1300, middle (pink) is 1300 - 1600 and high (purple) is 1600 - 1900. Qualitative measures, like our binned game time, are either true (1) or false (0) for that respective bin. Each point represents an observation and the movement along the x-axis (SHAP value) represents how much it impacted the prediction. A significant number of these top 15 variables were to be expected. It was very encouraging that many of the bins which were created were among these 15. This is a result of creating the bins by looking at the distributions of those continuous variables and utilizing football knowledge to help nudge the machine learning model in the correct direction.", dpi=300}
+```{r SHAP, echo = FALSE, dpi=300}
+#| fig-cap: "The 15 most impactful variables to the final model, colored by the feature value. For example quantitative measures such as ELO, where a low (yellow) is 1000-1300, middle (pink) is 1300 - 1600 and high (purple) is 1600 - 1900. Qualitative measures, like our binned game time, are either true (1) or false (0) for that respective bin. Each point represents an observation and the movement along the x-axis (SHAP value) represents how much it impacted the prediction. A significant number of these top 15 variables were to be expected. It was very encouraging that many of the bins which were created were among these 15. This is a result of creating the bins by looking at the distributions of those continuous variables and utilizing football knowledge to help nudge the machine learning model in the correct direction."
+#| cap-location: margin
+#| label: fig-shap-plot
+
+
+
 knitr::include_graphics('Visualizations/best_final_4th_05_shap_plot.png')
 
 # insert your path
@@ -285,7 +326,12 @@ In addition to choosing hyperparameters, another impactful choice was what varia
 
 In order to compare different models when standard measures of model performance are not as applicable, multiverse analysis can be used. Simply put, four copies of each row in the test data set were created and only the input play type was changed for each row. Then predictions were made for each row and the comparisons between input play types were evident. These predictions were then compared and led to the selection of the best model by comparing to what could be seen as “reasonable” predictions. Throughout this testing, the decision was made to help the model identify these complex football patterns by utilizing the created categorical variables. This was done in order to make more logical and reasonable predictions (in the football sense) and give the model the best chance of identifying the patterns that could help advise a coach. For example, this study operates under the premise that a coach would never punt when they are in field goal range (line of scrimmage less than or equal to 38 yard line) and they would never kick a field goal when the line of scrimmage is past the 38 yard line (greater than a 55 yard field goal). Additionally, the training and test data sets filtered out these observations. The rationale for this decision is presented in the plot below (see Figure 8), which shows the count of field goals taken by the line of scrimmage on the x axis and it is colored by the predicted field goal probability, which is based on a large sample of historical field goals from that line of scrimmage yard line. This cutoff could be altered based on the kicker, time of season, weather, and any other, relevant variables.
 
-```{r fg cutoff, echo = FALSE, fig.cap="Figure 8. The cutoff of 38 yards is quite clearly seen as one can observe both the steep decline in number of field goals attempted and the decrease in the field goal probability based on historical data.", dpi=300}
+```{r fg cutoff, echo = FALSE, dpi=300}
+#| fig-cap: "The cutoff of 38 yards is quite clearly seen as one can observe both the steep decline in number of field goals attempted and the decrease in the field goal probability based on historical data."
+#| cap-location: margin
+#| label: fig-fg-cutoff
+
+
 # knitr::include_graphics('../../../MSBA-SA/The Book Project v_3/Final Model v0/Plots for Write Up/fg_plot_holder.png')
 
 # insert your path
@@ -306,6 +352,8 @@ Examples of predictions with and without the risk adjustment are presented below
 ### Model Without Risk Aversion Adjustments : Analysts & Coaches {#model-without-risk-aversion-adjustments--analysts--coaches}
 
 ```{r Model Without Risk Aversion Adjustments, echo = FALSE, fig.cap="", dpi=300}
+
+
 knitr::include_graphics('Visualizations/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go No Adj/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
 
 # insert your path
@@ -340,3 +388,36 @@ The results presented in this project are intriguing. Using this research one ca
 
 The results presented in this project are intriguing. Using this research one can choose any upcoming game in the NFL, pull its data from nflfastR, gather all the information needed and calculate the statistics for the model. Once that is complete, one can plug the respective information into the appropriate places in the R script and it will generate 72 plots for each situation considering the variables categorical time left and categorical score difference in the game. Additionally, a coach or staffer could choose what type of plot they would like to see in the “heat of the moment,” while also specifying their expected yard line for the field goal cut off. In addition, the number of bins (and how many observations each bin contains) could be altered depending on the coach's thoughts. The coach could alter how wide these bins (yardline, time, and score differential) should stretch based on their coaching preferences and style. In addition, the coach would choose what coach risk aversion adjustment parameter was appropriate and this could change weekly.
 
+
+# Biblography and Reference {#biblography-and-reference}
+
+
+**NFL 4th Down Bot**
+
+  - https://www.nfl4th.com/articles/4th-down-research.html#nfl-coaches-are-increasingly-adhering-to-nfl4th-recommendations
+
+**Similiar Paper**
+
+  - https://cs229.stanford.edu/proj2016/report/LeeChenLakshman-PredictingOffensivePlayTypesIntheNFL-report.pdf
+  
+**ELO**
+
+  - https://en.wikipedia.org/wiki/Elo_rating_system
+
+**Hyperparameter tuning**
+
+  - Maximum depth - controls how many splits the model can do before it stops (a higher value means more conservative and less likely to overfit and vice versa)
+  - Minimum child weight - decided how much the strength needed by a variable in order to create a split (a higher value means more conservative and less likely to overfit and vice versa)
+  - Gamma - controls the amount of loss reduction needed to make a split
+  - Sub sample - proportion of the training data rows used to make each tree (allows different observation of the training data to be used focused on)
+  - Column sample -proportion of the training data columns used to make each tree (allows different features to shine)
+  - Eta - the rate at which the models learns (too fast can miss patterns vs. too slow can ignore patterns)
+  - Number of trees - controls the number of trees allowed in the model, each tree tries to correct for the previous trees mistakes (too many trees can over complicate the relationships and over fit the data and vice versa)
+  
+**Multiverse Analysis**
+
+  - https://pubmed.ncbi.nlm.nih.gov/27694465/
+
+**nflfastR**
+
+  - https://github.com/nflverse/nflfastR
