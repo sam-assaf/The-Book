@@ -68,8 +68,8 @@ library(gt)
 </h1>
 
 <h4 style="text-align: center; font-size:16pt">
+*Sam Assaf*
 
-*By Sam Assaf*
 </h4>
 <h4 style="text-align: center; font-size:11pt">
 *404-680-6269*
