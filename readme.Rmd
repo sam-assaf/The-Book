@@ -1,5 +1,5 @@
 ---
-title: "The Book"
+title: "Split Zone Analytics - The Book"
 output: github_document
 ---
 
@@ -8,3 +8,4 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Everything you need to know to use **The Book**!
+
