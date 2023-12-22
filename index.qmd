@@ -63,7 +63,7 @@ library(gt)
 
 <h1 style="text-align: center; font-size:25pt">
 
-**Split Zone Analytics - The Book**
+**Split Zone Analytics - The Book- Mick**
 
 </h1>
 
