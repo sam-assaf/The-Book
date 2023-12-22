@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- Everything you need to know to use **The Book**! -->
 
+
 <div align="center" style="margin-top: 20px;">
   <a href="https://bit.ly/split-zone-analytics" target="_blank" style="font-size: 18px; color: #0366d6; text-decoration: none;">Read the Paper</a>
 </div>
