@@ -67,9 +67,17 @@ library(gt)
 
 </h1>
 
-<h4 style="text-align: center; font-size:11pt">
+<h4 style="text-align: center; font-size:16pt">
 
 *By Sam Assaf*
+
+</h4>
+
+<h4 style="text-align: center; font-size:11pt">
+
+*404-680-6269*
+
+*samassaf7@gmail.com*
 
 </h4>
 
