@@ -9,3 +9,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Everything you need to know to use **The Book**!
 
+**Example Video**
+
+[![IMAGE ALT TEXT HERE](Visualizations/Youtube Video Thumbnail.png)](https://www.youtube.com/watch?v=EysyNzu0tno)
